@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Tutorial/Scenes/Walls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tutorial/Scenes/Floor.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Tutorial/Scripts/Box.gd" type="Script" id=8]
 [ext_resource path="res://Communication/ServerWS.gd" type="Script" id=9]
 [ext_resource path="res://Communication/ClientWS.gd" type="Script" id=10]
+[ext_resource path="res://Communication/Server.gd" type="Script" id=11]
 
 [node name="Main" type="Spatial"]
 
@@ -49,9 +50,12 @@ transform = Transform( 0.882488, 0.278477, -0.379031, 0, 0.805877, 0.592084, 0.4
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="Client" type="Node" parent="."]
+[node name="ClientWS" type="Node" parent="."]
 script = ExtResource( 10 )
 
-[node name="Server" type="Node" parent="."]
+[node name="ServerWS" type="Node" parent="."]
 script = ExtResource( 9 )
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource( 11 )
 [connection signal="body_entered" from="Box" to="Box" method="_on_Box_body_entered"]

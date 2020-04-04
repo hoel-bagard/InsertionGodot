@@ -19,6 +19,10 @@ config/name="Insertion"
 run/main_scene="res://Tutorial/Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[logging]
+
+file_logging/log_path="res://logs/log.txt"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
