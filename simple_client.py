@@ -25,7 +25,6 @@ def main():
         time.sleep(1)
 
         received_msg = recv_end(my_socket)
-        # message = message["received_msg"]
         print(f"Received message: {received_msg}")
         time.sleep(1)
 
@@ -49,13 +48,6 @@ def recv_end(my_socket, end="<EOF>", buffer_size=800000):
                 total_data.pop()
                 break
     message = ''.join(total_data)
-    # try:
-    #     message = json.loads(message)
-    # except (BrokenPipeError, json.decoder.JSONDecodeError):
-    #     logging.warning("Could not decode json", exc_info=True)
-    #     pass
-    # except Exception:
-    #     logging.error(traceback.format_exc())
     return message
 
 

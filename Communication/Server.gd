@@ -1,4 +1,3 @@
-
 extends Node
 
 const PORT: int = 9081
@@ -6,24 +5,23 @@ const PORT: int = 9081
 var server: TCP_Server
 var client: StreamPeerTCP
 
+
 func _ready() -> void:
 	server = TCP_Server.new()
-	var err := server.listen(PORT)
-	if err == OK:
+	if server.listen(PORT) == OK:  # In gdscript it seems like OK means 0
+		set_process(true)
 		print("Server started on port %d" % PORT)
 	else:
-		print("Could not start server")
+		print("Failed to start server on port %d" % PORT)
 
 
 func _process(_delta) -> void:
 	if server.is_connection_available():
 		client = server.take_connection()
 		print("Connected to local host server")
-		set_process(true) 
 	if client and !client.is_connected_to_host():
 		print("Client disconnected")
 		print("Server listening on port %d" % PORT)
-		set_process(false)  # stop listening for packets
 	if client and  client.is_connected_to_host():
 		poll_server()
 
@@ -36,7 +34,9 @@ func poll_server() -> void:
 	while client.get_available_bytes() > 0:
 		var msg = str(client.get_string(client.get_available_bytes()))
 		print("Received msg: %s " % msg)
+
 		send_var("Echo: %s " % msg)
+
 
 func send_var(msg: String) -> void:
 	msg = msg + "<EOF>"
@@ -44,12 +44,9 @@ func send_var(msg: String) -> void:
 		print("Sending: %s" % msg)
 		client.put_data(msg.to_ascii())
 
-#		wrapped_client.put_var(msg)
-#		var error = wrapped_client.get_packet_error()
-#		if error != 0:
-#			print("Error on packet put: %s" % error)
 
 
+# Bellow is a template is the server needs to serve more than 1 client.
 
 #var server: TCP_Server # for holding your TCP_Server object
 #var connection = [] # for holding multiple connection (StreamPeerTCP) objects
@@ -79,6 +76,3 @@ func send_var(msg: String) -> void:
 #			var index = connection.find( client)
 #			connection.remove( index )
 #			peerstream.remove( index )
-#
-#	for peer in peerstream:
-#		# Send stuff here ?
