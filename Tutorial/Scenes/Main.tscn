@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Tutorial/Scenes/Walls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tutorial/Scenes/Floor.tscn" type="PackedScene" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://Tutorial/Scripts/Peg.gd" type="Script" id=6]
 [ext_resource path="res://Tutorial/Scenes/Box.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Tutorial/Scripts/Box.gd" type="Script" id=8]
-[ext_resource path="res://Communication/ServerWS.gd" type="Script" id=9]
-[ext_resource path="res://Communication/ClientWS.gd" type="Script" id=10]
 [ext_resource path="res://Communication/Server.gd" type="Script" id=11]
 
 [node name="Main" type="Spatial"]
@@ -51,10 +49,8 @@ light_energy = 0.5
 shadow_enabled = true
 
 [node name="ClientWS" type="Node" parent="."]
-script = ExtResource( 10 )
 
 [node name="ServerWS" type="Node" parent="."]
-script = ExtResource( 9 )
 
 [node name="Server" type="Node" parent="."]
 script = ExtResource( 11 )

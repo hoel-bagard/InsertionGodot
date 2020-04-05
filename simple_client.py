@@ -15,25 +15,25 @@ def main():
     print("Connected to the environment")
     print(socket.gethostname())
 
-    sent_msg = "Test <EOF>"*500
+    sent_msg = "Hello from python client"
     sent_msg = sent_msg.encode("utf-8")
     while True:
         sent = my_socket.send(sent_msg)
         if sent == 0:
             raise RuntimeError("socket connection broken")
-        print("Message sent", flush=True)
+        print(f"Message sent: {sent_msg}", flush=True)
         time.sleep(1)
 
-    # message = recv_end(my_socket)
-    # message = message["message"]
-    # print(message)
+        received_msg = recv_end(my_socket)
+        # message = message["received_msg"]
+        print(f"Received message: {received_msg}")
+        time.sleep(1)
 
 
 def recv_end(my_socket, end="<EOF>", buffer_size=800000):
     total_data = []
     data = ''
     while True:
-        print("test")
         data = my_socket.recv(buffer_size).decode("utf-8")
         if not data:  # recv return empty message if client disconnects
             return data
@@ -49,13 +49,13 @@ def recv_end(my_socket, end="<EOF>", buffer_size=800000):
                 total_data.pop()
                 break
     message = ''.join(total_data)
-    try:
-        message = json.loads(message)
-    except (BrokenPipeError, json.decoder.JSONDecodeError):
-        logging.warning("Could not decode json", exc_info=True)
-        pass
-    except Exception:
-        logging.error(traceback.format_exc())
+    # try:
+    #     message = json.loads(message)
+    # except (BrokenPipeError, json.decoder.JSONDecodeError):
+    #     logging.warning("Could not decode json", exc_info=True)
+    #     pass
+    # except Exception:
+    #     logging.error(traceback.format_exc())
     return message
 
 
