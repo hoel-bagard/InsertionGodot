@@ -42,7 +42,10 @@ func send_var(msg: String) -> void:
 	msg = msg + "<EOF>"
 	if client.is_connected_to_host():
 		print("Sending: %s" % msg)
-		client.put_data(msg.to_ascii())
+		var error := client.put_data(msg.to_ascii())
+		if error != 0:
+			print("Error on packet put: %s" % error)
+
 
 
 
