@@ -48,10 +48,7 @@ transform = Transform( 0.882488, 0.278477, -0.379031, 0, 0.805877, 0.592084, 0.4
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="ClientWS" type="Node" parent="."]
-
-[node name="ServerWS" type="Node" parent="."]
-
 [node name="Server" type="Node" parent="."]
 script = ExtResource( 11 )
+pathToPeg = NodePath("../Peg")
 [connection signal="body_entered" from="Box" to="Box" method="_on_Box_body_entered"]

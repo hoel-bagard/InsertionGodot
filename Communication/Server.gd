@@ -1,19 +1,24 @@
 extends Node
+export(NodePath) var pathToPeg
+
 
 const PORT: int = 9081
 
 var server: TCP_Server
 var client: StreamPeerTCP
 
+var peg: Node
+var peg_coord: Array
 
 func _ready() -> void:
+	peg = get_node(pathToPeg)
+
 	server = TCP_Server.new()
 	if server.listen(PORT) == OK:  # In gdscript it seems like OK means 0
 		set_process(true)
 		print("Server started on port %d" % PORT)
 	else:
 		print("Failed to start server on port %d" % PORT)
-
 
 func _process(_delta) -> void:
 	if server.is_connection_available():
@@ -24,7 +29,7 @@ func _process(_delta) -> void:
 		print("Server listening on port %d" % PORT)
 	if client and  client.is_connected_to_host():
 		poll_server()
-
+	# peg.jump()
 
 func stop_server() -> void:
 	server.stop()
@@ -33,9 +38,32 @@ func stop_server() -> void:
 func poll_server() -> void:
 	while client.get_available_bytes() > 0:
 		var msg = str(client.get_string(client.get_available_bytes()))
-		print("Received msg: %s " % msg)
+		# print("Received msg: %s " % msg)
+		# send_var("Echo: %s " % msg)
 
-		send_var("Echo: %s " % msg)
+		var json_data = JSON.parse(msg)
+		if json_data.error != OK:
+			print("Could not parse JSON")
+			return
+		json_data = json_data.result
+		print(json_data)
+		if json_data["coord"]:
+			peg_coord = peg.move(json_data["coord"])
+
+		# Answer
+		# capture screen
+		# var img = get_viewport().get_texture().get_data()
+		# img.save_png("res://screenshot.png")
+		# img = Marshalls.variant_to_base64(img)
+		# img = Marshalls.raw_to_base64(img.get_buffer(img.get_len()))
+		var data = {
+			"action": "FIRST",
+			# "image": img,
+			"coord": peg_coord,
+			"done": 0
+		}
+		send_var(JSON.print(data))
+
 
 
 func send_var(msg: String) -> void:
