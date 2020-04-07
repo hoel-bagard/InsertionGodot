@@ -19,6 +19,11 @@ config/name="Insertion"
 run/main_scene="res://Tutorial/Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=600
+window/size/always_on_top=true
+
 [logging]
 
 file_logging/log_path="res://logs/log.txt"

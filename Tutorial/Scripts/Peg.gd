@@ -13,7 +13,7 @@ func _ready():
 
 func _physics_process(delta):
 	# manual_move(delta)
-	move_and_slide(linear_velocity, Vector3(0, 1, 0))
+	linear_velocity = move_and_slide(linear_velocity, Vector3(0, 1, 0))
 	rotate_x(angular_velocity[0] * delta)
 	rotate_y(angular_velocity[1] * delta)
 	rotate_z(angular_velocity[2] * delta)

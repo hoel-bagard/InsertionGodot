@@ -52,18 +52,20 @@ func poll_server() -> void:
 
 		# Answer
 		# capture screen
-		# var img = get_viewport().get_texture().get_data()
+		var img = get_viewport().get_texture().get_data()
 		# img.save_png("res://screenshot.png")
-		# img = Marshalls.variant_to_base64(img)
-		# img = Marshalls.raw_to_base64(img.get_buffer(img.get_len()))
+		img.crop(600, 600)
+		img.convert(4)
+		img = String(Array(img.get_data()))
+		img = Marshalls.variant_to_base64(img)
+		# img = Marshalls.raw_to_base64(img)  # img.get_buffer(img.get_len()))
 		var data = {
 			"action": "FIRST",
-			# "image": img,
+			"image": img,
 			"coord": peg_coord,
 			"done": 0
 		}
 		send_var(JSON.print(data))
-
 
 
 func send_var(msg: String) -> void:
