@@ -16,12 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Insertion"
-run/main_scene="res://Tutorial/Scenes/Main.tscn"
+run/main_scene="res://Insertion/Scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=600
+window/size/width=100
+window/size/height=100
 window/size/always_on_top=true
 
 [logging]
