@@ -21,9 +21,9 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=100
-window/size/height=100
-window/size/always_on_top=true
+window/size/width=64
+window/size/height=64
+window/size/borderless=true
 
 [logging]
 

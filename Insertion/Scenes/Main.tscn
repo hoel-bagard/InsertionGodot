@@ -31,4 +31,3 @@ script = ExtResource( 5 )
 script = ExtResource( 4 )
 pathToPeg = NodePath("../Peg")
 pathToGoal = NodePath("../GoalPiece")
-[connection signal="body_entered" from="GoalPiece" to="GoalPiece" method="_on_GoalPiece_body_entered"]

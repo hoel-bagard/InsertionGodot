@@ -14,7 +14,7 @@ var answer_msg: String
 var peg: Node
 var peg_coord: Array
 var goal: Node
-const USE_IMG: bool = false
+const USE_IMG: bool = true
 var img: String
 
 
@@ -49,7 +49,7 @@ func poll_server() -> void:
 			print("Could not parse JSON")
 			return
 		json_data = json_data.result
-		print(json_data)
+		# print(json_data)
 
 		# Answer
 		if json_data["action"] == "FIRST":
@@ -72,8 +72,8 @@ func _get_screenshot(save_img: bool = false) -> String:
 	# capture screen
 	var img_raw: Image = get_viewport().get_texture().get_data()
 	if save_img:
-		img_raw.save_png("res://screenshot.png")
-	# img_raw.crop(100, 100)
+		var error = img_raw.save_png("res://screenshot.png")
+	# img_raw.crop(64, 64)
 	img_raw.convert(4)
 	img = String(Array(img_raw.get_data()))
 	img = Marshalls.variant_to_base64(img)
@@ -99,7 +99,7 @@ func _step_answer() -> Dictionary:
 		"image": img,
 		"done": goal.is_done()
 	}
-	print("Success: %s" % goal.is_done())
+	# print("Success: %s" % goal.is_done())
 	return answer_json
 
 func _reset_answer() -> Dictionary:
