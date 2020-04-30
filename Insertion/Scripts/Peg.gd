@@ -1,8 +1,8 @@
 extends RigidBody
 
 # RL vars
-var linear_force: Vector3 = Vector3()
-var angular_force: Vector3 = Vector3()
+var linear_impulse: Vector3 = Vector3()
+var torque_impulse: Vector3 = Vector3()
 var current_position: Array
 var initial_trans: Vector3
 var initial_rot: Vector3
@@ -13,10 +13,10 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Cheat Mode
-	# linear_force = Vector3(0, 0, -5)
-	# angular_force = Vector3(0, 0, 0)
-	self.add_torque(delta*angular_force)
-	self.apply_central_impulse(delta*linear_force)
+	# linear_impulse = Vector3(0, 0, -5)
+	# torque_impulse = Vector3(0, 0, 0)
+	self.apply_torque_impulse  (delta*0.1*torque_impulse)
+	self.apply_central_impulse(delta*linear_impulse)
 	pass
 
 
@@ -29,8 +29,8 @@ func move(coord) -> void:
 	var beta: float = coord[4]
 	var gamma: float = coord[5]
 	
-	linear_force = Vector3(x, y, z)
-	angular_force = Vector3(alpha, beta, gamma)
+	linear_impulse = Vector3(x, y, z)
+	torque_impulse = Vector3(alpha, beta, gamma)
 
 
 func reset() -> void:
