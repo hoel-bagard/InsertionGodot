@@ -10,10 +10,10 @@
 [node name="Spatial" type="Spatial"]
 
 [node name="Background" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, -2, 5, -20 )
+transform = Transform( 1.10803, 0, 0, 0, -1.80521e-07, -1.10803, 0, 1.10803, -1.80521e-07, -2, 5, -20 )
 
 [node name="Peg" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102966, 0.0507935, 5.579 )
 script = ExtResource( 6 )
 
 [node name="Camera" type="Camera" parent="Peg"]
@@ -26,8 +26,11 @@ shadow_enabled = true
 [node name="GoalPiece" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
 script = ExtResource( 5 )
+pathToPeg = NodePath("../Peg")
 
 [node name="Server" type="Node" parent="."]
 script = ExtResource( 4 )
 pathToPeg = NodePath("../Peg")
 pathToGoal = NodePath("../GoalPiece")
+[connection signal="area_entered" from="GoalPiece" to="GoalPiece" method="_on_GoalPiece_area_entered"]
+[connection signal="body_shape_entered" from="GoalPiece" to="GoalPiece" method="_on_GoalPiece_body_shape_entered"]

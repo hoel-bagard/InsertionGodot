@@ -72,7 +72,7 @@ func _get_screenshot(save_img: bool = false) -> String:
 	# capture screen
 	var img_raw: Image = get_viewport().get_texture().get_data()
 	if save_img:
-		var error = img_raw.save_png("res://screenshot.png")
+		var _error = img_raw.save_png("res://screenshot.png")
 	# img_raw.crop(64, 64)
 	img_raw.convert(4)
 	img = String(Array(img_raw.get_data()))

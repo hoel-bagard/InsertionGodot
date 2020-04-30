@@ -1,12 +1,19 @@
 extends Spatial
 
+export(NodePath) var pathToPeg
 
 var done: bool = false
 var position: PoolVector3Array
+var peg: Node
+
+func _ready() -> void:
+	peg = get_node(pathToPeg)
 
 
-func _on_GoalPiece_body_entered(_body) -> void:
-	done = true
+func _on_GoalPiece_body_shape_entered(body_id, _body, _body_shape, _area_shape) -> void:
+	if body_id == peg.get_instance_id():
+		print("ENTERED")
+		done = true
 
 
 func get_coord() -> Array:
@@ -34,3 +41,9 @@ func is_done() -> bool:
 
 func set_done(state: bool) -> void:
 	done = state
+
+
+
+
+
+
