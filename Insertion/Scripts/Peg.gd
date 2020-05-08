@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	# Cheat Mode
 	# linear_impulse = Vector3(0, 0, -5)
 	# torque_impulse = Vector3(0, 0, 0)
-	self.apply_torque_impulse  (delta*0.1*torque_impulse)
+	self.apply_torque_impulse  (delta*torque_impulse)
 	self.apply_central_impulse(delta*linear_impulse)
 	pass
 
@@ -23,8 +23,8 @@ func _physics_process(delta: float) -> void:
 func move(coord) -> void:
 	# print("Moving peg by: ", coord)
 	var x: float = coord[0]
-	var  y: float = coord[1]
-	var  z: float = coord[2]
+	var y: float = coord[1]
+	var z: float = coord[2]
 	var alpha: float = coord[3]
 	var beta: float = coord[4]
 	var gamma: float = coord[5]

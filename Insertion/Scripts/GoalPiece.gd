@@ -12,7 +12,6 @@ func _ready() -> void:
 
 func _on_GoalPiece_body_shape_entered(body_id, _body, _body_shape, _area_shape) -> void:
 	if body_id == peg.get_instance_id():
-		print("ENTERED")
 		done = true
 
 
